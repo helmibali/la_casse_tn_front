@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="body" style="background-color:#e9ebedaf;">
+    
+    <div class="card shadow signup-card">
+        <div class="title mt-2">
+            <h3></h3>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-4">
+          <p>Bievenue!</p>  
+                <!-- <img src="{{socialUser.photoUrl}}" width="100" alt="">     -->
+                    <p>Continuer avec {{socialUser?.name}}</p>
+                     <form>
+
+                    <div class="form-group" hidden>
+                        <label>Nom Utilisateur :</label>
+                        <input type="text" name="username"  class="form-control" [(ngModel)]="user.username" hidden>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label>Mot de passe :</label>
+                        <input type="password" name="password" class="form-control"  [(ngModel)]="user.password" hidden >
+                    </div>
+                    <div class="row justify-content-md-center mb-5">
+                        <button type="button" (click)="onLoggedin()" class="btn btn-success">valider</button>
+                    </div>
+                    
+                </form>
+              
+      
+           
+            </div>
+        </div>
+     </div>
+</div>
+

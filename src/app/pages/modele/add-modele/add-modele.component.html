@@ -1,0 +1,28 @@
+<app-dashboard></app-dashboard>
+<div class="container" style="margin-left:20%;">
+<form [formGroup]="this.modeleService.dataForm" (ngSubmit)="addData()">
+    <input type="hidden"  formControlName="id" id="id">
+  
+   
+   
+    <div class="form-group">
+      <label>Libelle Modele </label>
+      <input type="text" class="form-control" formControlName="libelleModele" id="libelle">
+    </div>
+
+    <div>
+        <label>Marques</label>
+        <select  id="marque_id" formControlName="marque_id">
+            <option *ngFor="let m of marques" [value]="m.id">
+                {{m.libelleMarque}}
+            </option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+      <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+      <a class="btn btn-outline-success" routerLink="/modeles"><i class="fa fa-plus-square"></i> Liste</a>
+    </div>
+
+
+  </form></div>

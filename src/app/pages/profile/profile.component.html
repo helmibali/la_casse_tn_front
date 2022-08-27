@@ -1,0 +1,126 @@
+<div class="n"><app-navbar></app-navbar></div>
+<div style="background-color:#e9ebedaf ;">
+ 
+   
+        <div class="all">
+        <div class="profile">
+          <div style="width:100% ;position:sticky; top:80px;">
+            <div class="card mt-3 mb-3" style="width:70%;margin: auto;border-radius: 10px;">
+           
+              <div class="card-body" style="margin:auto;">
+                <div>
+                  <div *ngIf="user?.filename===null" style="display:flex ;align-items:center;" >
+                    <img src="../../../assets/images/user1.png"  class="rounded-circle" 
+                    style="width: 90px;height:80px;margin:auto;" alt="...">
+                  </div>
+                  <div *ngIf="user?.filename!==null" style="display:flex ;align-items:center;">
+                    <img src="{{'http://localhost:8081/api/ImgUser/'+user.user_id}}"  class="rounded-circle" 
+                    style="width: 70px;height:80px;margin:auto;" alt="...">
+                  </div>
+                </div>
+                <h5 class="card-title" style="margin:auto ;" >{{user?.prenom}} {{user?.nom}}</h5>
+              </div>
+              <ul class="list-group list-group-flush mb-3">
+             
+                
+                <li class="list-group-item"*ngIf="user?.telephone !==null" ><i class="fa fa-phone"> {{user?.telephone}}</i></li>
+                <li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"> {{user?.username}}</i></li>
+                <li class="list-group-item"*ngIf="user?.delegation !==null"><i class="fa fa-map-marker" aria-hidden="true"> {{user?.delegation.libelle}},{{user?.delegation.gouvernorat.libelle}}</i></li>
+              </ul>
+            
+            </div>
+          </div>
+  
+        
+  
+          
+
+        
+  
+        </div>
+     
+      <div class="produits">
+        <div style="display:flex ;">
+          <div class="mt-4 mb-3" style="width: 60%;">
+            <input class="form-control form-control-lg recherche text-center"
+            style="border-radius: 10px;" 
+           type="search" 
+           placeholder="Recherche" 
+           aria-label="Search"
+            [(ngModel)]="term">
+          </div>
+
+          
+       <div class="ml-5" style="display:flex ;justify-content:center;align-items:center; width:15%" >
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Envoyer un message a {{user?.prenom}}
+          </button>
+          <div class="dropdown-menu p-2" style="border-radius:10px;left:71%;top:78%;background-color:rgb(231 215 215 / 88%);width:120%">
+            <div class="write mt-2">  
+
+              <form [formGroup]="this.messageService.dataForm" (ngSubmit)="onSubmit()">
+                <input type="hidden"  formControlName="id" id="id">
+      
+       
+                <div class="form-group">
+                  
+                  <input type="date" class="form-control" formControlName="dateCreation" id="" hidden>
+                </div>
+                <div class="form-group">
+                  
+                  <input type="text" class="form-control" formControlName="auteur" id="" hidden>
+                </div>
+                <div class="form-group">
+                  
+                    <input type="text" class="form-control" formControlName="emiter" id="" hidden>
+                  </div>
+                  <div class="form-group">
+                    <textarea 
+                    class="form-control mb-2"
+                     placeholder="ecrire un message..." 
+                     id="floatingTextarea"
+                      formControlName="message"
+                      ></textarea>
+                  </div>
+                
+                  <button 
+                  class="btn btn-primary"
+                   type="submit"
+                   
+                    >Envoyer
+                      
+                  </button>
+                  <button
+                
+                  type="button"
+                  class="btn "
+                  >
+                  Annuler
+              </button>
+              </form>
+            
+              </div>
+        </div>
+       </div>
+
+              
+
+        </div></div>
+        <span  class="badge badge-pill badge-light" style="color:rgb(239, 74, 74)">
+          
+           <h6 >Annonces actives pour {{user?.prenom}} {{user?.nom}} ({{produits?.length}})</h6> 
+           </span>
+        <app-produits-filtred
+         [produits]="produits"
+          [term]="term"
+          ></app-produits-filtred>
+        
+        </div>
+
+
+       
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,49 @@
+<app-navbar *ngIf="!authService.isAdmin()"></app-navbar>
+<app-dashboard *ngIf="authService.isAdmin()"></app-dashboard>
+<div class="entete">
+  <h5 class="text-center mt-1">Liste des articles</h5>
+<div class="ajouter mt-1"><a class="btn btn-primary" routerLink="/ajouter-article"><i class="fa fa-plus"></i>&nbsp; Ajouter</a></div>
+</div>
+
+<!-- tableau de Produits -->
+
+<div class="container tab">
+    <div class="card shadow mb-4">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">titre</th>
+        <th scope="col">Text</th>
+        <th scope="col">date création</th>
+      
+        <th colspan="2" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let a of articles | paginate: {itemsPerPage: 15, currentPage: p }">
+      <td>
+        <a href="#"><img class="card-img-top img-responsive rounded-circle"
+            src = "{{'api/imga/'+a.id}}" 
+            style = "height :70px;width:50px"
+           alt=""></a>
+    </td> 
+        <td>{{a.title}}</td>
+        <td>{{a.text}}</td>
+        <td>{{a.dateCreation|date:'dd/MM/yyyy'}}</td> 
+      
+       
+       
+        <td><a *ngIf="authService.isAdmin()" class="btn btn-outline-danger" (click)="supprimerArticle(a)">
+          <i class="fa fa-trash"></i></a></td>
+        <td><a *ngIf="authService.isAdmin()" class="btn btn-outline-secondary" >
+          <i class="fa fa-edit"></i></a>
+        </td>
+    </tr>
+  </tbody>
+</table>
+   
+  
+</div>
+<pagination-controls (pageChange)="p =$event"></pagination-controls>
+</div>

@@ -1,0 +1,30 @@
+.root{
+    display: flex;
+ 
+}
+
+.create-article{
+    width: 25%;
+    display: flex; 
+    /* justify-content:center */
+    flex-direction: column;
+    z-index: 9997;
+}
+
+.articles{ 
+    width: 50%;
+    margin-bottom: 40px;
+  
+}
+
+.config{ 
+    width: 25%;  
+}
+
+.n{
+    position: sticky;
+    top:0px;
+    width: 100%;
+ z-index: 9998; 
+
+}

@@ -1,0 +1,71 @@
+<app-dashboard></app-dashboard>
+
+<div class="container tab">
+    <h5>Les utilisateurs</h5>
+
+    <div class="text-center mt-1" *ngIf="isLoading != false">
+      <div class="card shadow mb-4">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        
+    </div>
+    <div class="alert alert-danger mt-5" *ngIf="errTXT !=''">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa tempore aperiam deleniti? Aliquid ducimus tempore architecto atque voluptatum, fugit optio doloribus quaerat magnam possimus est incidunt rem velit placeat tenetur!
+    
+    </div>
+    <div class="card shadow mb-4 rounded-5">
+    <table class="table align-middle mb-0">
+        <thead  class="bg-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">photo</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col">roles</th>
+           
+            <th colspan="2" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of users">
+            <td>{{ u.user_id }}</td> 
+            <td>
+              <div *ngIf="u.filename === null">
+                <a [routerLink]="['/modifier-image-utilisateur',u.user_id]"><img class="card-img-top img-responsive rounded-circle"
+                  src = "../../../assets/images/user.png" 
+                  style = "height :70px;width:50px"
+                 alt=""></a>
+              </div>
+              <div *ngIf="u.filename !== null">
+                <a [routerLink]="['/modifier-image-utilisateur',u.user_id]"><img class="card-img-top img-responsive rounded-circle"
+                  src = "{{'http://localhost:8081/api/ImgUser/'+u.user_id}}" 
+                  style = "height :70px;width:50px"
+                 alt=""></a>
+              </div>
+             
+          </td> 
+            <td>
+              <p class="fw-bold mb-1">{{ u.prenom }} {{ u.nom }}</p>
+              <p class="text-muted mb-0">{{ u.username }}</p>
+            </td> 
+       
+            <td>{{ u.naissance|date:'dd/MM/yyyy'}}</td> 
+            <td>
+              <ul class="list-group" *ngFor="let role of u.roles">
+                <li class="list-group-item">{{ role.role }}</li>
+              </ul>
+            </td>
+         
+           <td><a  class="btn btn-outline-danger" (click)="supprimerUtilisateur(u)">
+            <i class="fa fa-trash"></i></a>
+          </td>
+          <td><a  class="btn btn-outline-secondary">
+            <i class="fa fa-edit" [routerLink]="['/modifier-utilisateur',u.user_id]"></i></a>
+          </td>
+    
+          </tr>
+          
+        </tbody>
+      </table>
+</div>
+

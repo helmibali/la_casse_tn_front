@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<div class="body" style="background-color:#e9ebedaf;">
+    <!-- <div class="title">
+        <h3>S'inscrire sur La casse Tunise</h3><br>
+        <p>Tenez-vous au courant dans l'univers de rechange</p>
+    </div> -->
+    
+    <div class="card signup-card">
+      <div class="row justify-content-md-center mt-5">
+        <h3>S'inscrire</h3><br>
+        <div>
+          <p>Tenez-vous au courant dans l'univers de rechange</p>
+        </div>
+        
+        
+    </div>
+        <button class="btn btn-primary mt-5" routerLink="/inscription" style="width:80%;margin: auto; border-radius: 20px;">S'inscrire sur LaCasse.tn</button>
+        <button class="btn btn-light google-sign-in mt-3"
+        style="width:80%;margin: auto;border-radius: 20px;border: 1px solid rgb(147, 142, 142);"
+         (click)="signInHandler()">
+            <img [src]="'../../../assets/images/Google.svg.png'" width="30" alt="google"/>
+            S'inscrire avec Google
+          </button>
+        <button class="btn btn-light google-sign-in mt-3 mb-5"
+        style="width:80%;margin: auto;border-radius: 20px;border: 1px solid rgb(147, 142, 142);"(click)= "signInWithFB()" >
+            <img [src]="'../../../assets/images/fb.png'" width="30" />
+            S'inscrire avec Facebook
+          </button>
+          
+    </div>
+</div>
+
+<app-footer></app-footer>

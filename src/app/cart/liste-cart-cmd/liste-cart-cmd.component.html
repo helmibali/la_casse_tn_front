@@ -1,0 +1,73 @@
+
+<!-- <button type="button" class="btn-outline-danger"style="border:none ;" id="myModalProduit"  data-toggle="modal" data-target="#cart">
+    
+    Produits commandés
+    <span class="badge">{{cartsCmd?.length}}</span>
+  
+
+
+</button>  -->
+
+<!-- <div class="fade modal card mt-5" style="    top: -387%;
+left: 110%;
+height: 650px;
+z-index: 9999 !important;
+display: block;
+padding-right: 17px;
+position: absolute;
+width: 385%;
+height: 570px;
+ z-index: 9999 !important;" id="cart" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content" style="width:179% ;left:-37%;border:none; z-index: 9999 !important;"> -->
+
+<div class="row" >
+    <div class="col-md-8 cart">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        <div class="title">
+            <div class="row">
+                <div class="col"><b>Mes produits commandés</b></div>
+                <!-- <div class="col align-self-center text-right text-muted">{{cartsCmd?.length}} pièces</div> -->
+            </div>
+        </div>    
+        <div class="row border-top border-bottom" *ngFor="let c of cartsCmd">
+            <div class="row main align-items-center">
+                <div class="col-2"><img class="img-fluid" src="{{'http://localhost:8081/api/imgp/'+c.produit.idProduit}}" ></div>
+                <div class="col">
+                    <div class="row text-muted">{{c.produit.categorie.nomCategorie}}</div>
+                    <div class="row">{{c.produit.nomProduit}}</div>
+                  <div style="display:flex;"*ngFor="let cmd of c.commandes" > 
+                    <p>commandé par:</p>
+
+                     <a  class="btn btn-outline-danger" (click)="toProfile(cmd.user.user_id)" >{{cmd.user.prenom}} {{cmd.user.nom}} </a>
+                  </div> 
+                </div>
+              
+                <div class="col">{{c.produit.prixProduit | currency:"TND":"symbol"}} <span class="close"style="">en cours</span></div>
+            </div>
+        </div>
+       
+      
+        <div type="button " class="close back-to-shop" data-dismiss="modal" aria-label="Close" ><span class="text-muted">Back to shop</span></div>
+    </div>
+    <div class="col-md-4 summary">
+        <div><h5><b>Sommaire</b></h5></div>
+        <hr>
+        <!-- <div class="row">
+            <div class="col" style="padding-left:0;">{{cartsCmd?.length}} pièces</div>
+            <div class="col text-right">{{prixVenteEstime() | currency:"TND":"symbol"}}</div>
+        </div>
+     
+        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+            <div class="col">Prix de vente estimé</div>
+            <div class="col text-right"> {{ prixVenteEstime() | currency:"TND":"symbol" }} </div>
+        </div> -->
+        <button class="btn btn-info text-uppercase mr-2 px-4">retour</button>
+    </div>
+<!-- </div>
+    </div></div>
+</div> -->
+
+

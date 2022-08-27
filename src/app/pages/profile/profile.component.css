@@ -1,0 +1,27 @@
+.n{
+    position: sticky;
+    top:0px;
+    width: 100%;
+    z-index: 9990;
+
+}
+.all{
+    display: flex;
+   
+}
+
+.profile{
+    width: 23%;
+    z-index:9989;
+}
+
+.produits{
+    width: 73%;
+    border-radius: 25px;
+}
+
+
+
+
+
+

@@ -1,0 +1,249 @@
+.n{
+    position: sticky;
+    top:0px;
+    width: 100%;
+    z-index: 9998; 
+
+}
+.fa-search {
+    content: "\f002";
+    position: absolute;
+    top: 33px;
+    right: 280px;
+}
+.icon-categorie{
+    position: absolute;
+    top:96px;
+    /* right: 300px; */
+    left: 50px;
+
+}
+.icon-control {
+    margin-top: 5px;
+    float: right;
+    font-size: 80%;
+}
+
+
+
+.btn-light {
+    background-color: #fff;
+    border-color: #e4e4e4;
+}
+
+.list-menu {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+.list-menu a {
+    color: #343a40;
+}
+
+
+
+
+
+
+/* .marque {
+   
+    width: 90%;
+   
+    margin-top: 10%;
+
+   
+} */
+
+.all{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* background-color: #d6def3;  */
+    /* background-color: #f4d5da; */
+
+
+}
+
+
+.filtre{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 24%;
+    margin: auto;
+   position: sticky;
+   top: 85px;
+   height:400px;
+   /* background-color: #f1f4fb; */
+  
+
+   
+
+}
+.btnFiltre{
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+app-produits-filtred{
+    width: 75%;
+}
+
+.produits{
+    width: 75%;
+
+
+
+}
+
+.option{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.inputFiltre{
+    border: none;
+    background-color: #f1f4fbd3;
+    /* background-color: #e5e6e698; */
+    /* border-radius: 50px; */
+    
+}
+
+.recherche{
+    border: none;
+    background-color: #f1f4fbd3;
+}
+
+.select{
+   
+    /* text-align: center;
+    margin: auto; */
+}
+.search-btn{
+    display: flex;    
+    width: 18%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.mod-mar{
+display: flex;
+
+align-items: center;
+justify-content: space-between;
+
+
+}
+.marque{
+    width: 45%;
+    font-size: 15px;
+    font-weight: bold;
+    
+
+}
+.modele{
+    width: 45%;
+
+}
+.filter{
+    background-color:#ddd;
+   
+    display: flex;
+    width: 25%;
+    border-radius: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    position: sticky;
+   top: 85px;
+    
+}
+.filtre{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 24%;
+    margin: auto;
+   position: sticky;
+   top: 85px;
+   height:400px;
+   /* background-color: #f1f4fb; */
+  
+
+   
+
+}
+
+input{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+
+
+.produits{
+    background-color: #f4f4f4;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+body{
+	background: #F5F1EE;
+	font-family: 'Roboto', sans-serif;
+}
+.card{
+	width: 250px;
+	border-radius: 10px;
+}
+
+.card-img-top{
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+span.text-muted{
+	font-size: 12px;
+}
+small.text-muted{
+	font-size: 8px;
+}
+h5.mb-0{
+	font-size: 1rem;
+}
+small.ghj{
+	font-size: 9px;
+}
+.mid{
+	background: #ECEDF1;
+}
+h6.ml-1{
+	font-size: 13px;
+}
+small.key{
+	text-decoration: underline;
+	font-size: 9px;
+	cursor: pointer;
+}
+.btn-danger{
+	color: #FFCBD2;
+}
+.btn-danger:focus{
+	box-shadow: none;
+}
+small.justify-content-center{
+	font-size: 9px;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+@media screen and (max-width:600px){
+    .col-sm-4{
+        margin-bottom: 50px;
+    }
+}
+
+

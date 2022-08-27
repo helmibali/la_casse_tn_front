@@ -1,0 +1,39 @@
+<app-dashboard></app-dashboard>
+<div class="entete">
+  <h5 class="text-center mt-1">Liste des catégories</h5>
+
+<div class="ajouter mt-1">
+  <app-add-delegation></app-add-delegation>
+</div>
+</div>
+
+
+<!-- tableau de Produits -->
+<div class="container tab">
+    <div class="card shadow mb-4">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Libellé</th>
+        <th scope="col">Gouvernorat</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let d of delegations">
+        <td>{{d.id}}</td>
+        <td>{{d.libelle}}</td>
+        <td>{{d.gouvernorat.libelle}}</td>
+        <!-- <td><a *ngIf="authService.isAdmin()" class="btn btn-outline-danger"(click)="supprimerCategorie(c)"> -->
+          <!-- <i class="fa fa-trash"></i></a></td> -->
+        <!-- <td><a *ngIf="authService.isAdmin()" class="btn btn-outline-secondary"  [routerLink]="['/updateCategorie',c.id]" >
+          <i class="fa fa-edit"></i></a> -->
+        <!-- </td> -->
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+

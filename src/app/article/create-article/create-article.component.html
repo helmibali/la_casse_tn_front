@@ -1,0 +1,114 @@
+<div *ngIf="authService.isloggedIn">
+<button type="button" 
+class="btn btn-outline-danger"
+ style="border:none;font-weight:bold; color:black;"
+  data-toggle="modal" 
+  id="myModalArt"
+   data-target="#article">
+    publier un post
+  </button>
+</div>
+<div *ngIf="!authService.isloggedIn">
+    <button type="button" class="btn btn-outline-primary mt-3" routerLink="/login" >
+        Créez votre publication <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+      </button>
+    </div>
+  
+  <!-- Modal -->
+  <div 
+  class="modal fade"
+   style="position:absolute;
+   height: 500px;
+    top: -78%;
+   width: 200%;
+   height: 500px;
+   left: 121%;" 
+   id="article" 
+   data-backdrop="static" 
+   data-keyboard="false" 
+   tabindex="-1" 
+   aria-labelledby="staticBackdropLabel" 
+   aria-hidden="true"
+   >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Créez votre publication</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="container">
+            <form [formGroup]="this.articleService.dataForm" (ngSubmit)="insertArticle()">
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="title">
+                    Titre d'article
+                </label>
+                <input id="title" type="text" formControlName="title" class="form-control">
+              </div>
+    
+              <div class="form-group">
+                <label for="text">
+                    Corps d'article
+                </label>
+                <textarea id="text" type="text" formControlName="text" class="form-control"></textarea>
+              </div>
+
+
+              <!-- <div class="form-group">
+                <label>Upload une image</label><br/>
+                    <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                    <img [src]="imgURL" height="200" *ngIf="imgURL">
+            </div> -->
+              
+
+            <p>
+              <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa fa-image">  Image</i>
+              </a>
+              
+            </p>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+               
+                <div class="form-group">
+                  <label>File Upload  </label>
+                      <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                      <img [src]="imgURL" height="200" *ngIf="imgURL">
+              </div>
+      
+              <button
+               class="btn btn-primary"
+               type="button" 
+               data-toggle="collapse" 
+               data-target="#collapseExample"
+                aria-expanded="false"
+                 aria-controls="collapseExample"
+               [disabled]="! onSelect" 
+               (click)="validateImg()"
+               >valider
+              </button>
+              <p>{{ok}}</p>
+              </div>
+            </div>
+      
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-warning" data-dismiss="modal">retour</button>
+          <button class="btn btn-outline-success" type="submit">Publier!</button>
+        </div>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+

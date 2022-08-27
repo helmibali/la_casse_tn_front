@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Gestion des Produits</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+      <!-- Brand -->
+      <a class="navbar-brand" routerLink="/"
+        ><img
+          src="../../../assets/images/logo1.png"
+          alt=""
+          style="width: 275px; height: 260px; position: absolute; top: -140%"
+      /></a>
+      <!-- Links -->
+      <!-- dropdown -->
+      <div class="dropdown">
+        <button
+          class="btn btn-light dropdown-toggle ml-1"
+          style="
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          "
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        ></button>
+        <div
+          class="dropdown-menu"
+          style="border-radius: 10px; background-color: #e9ebeddf"
+          aria-labelledby="dropdownMenu2"
+        >
+          <button class="dropdown-item" type="button">
+            <a class="user_options" routerLink="/">Acceill</a>
+          </button>
+          <button class="dropdown-item" type="button">
+            <a class="user_options" routerLink="/Conditions-utilisation"
+              >Conditions d'utilisation</a
+            >
+          </button>
+          <button class="dropdown-item" type="button">
+            <a class="user_options" routerLink="/Regles-De-Diffusion"
+              >Règles de diffusion</a
+            >
+          </button>
+          <button class="dropdown-item" type="button">
+            <a class="user_options" routerLink="/contact">Contactez-nous</a>
+          </button>
+        </div>
+      </div>
+      <!-- dropdown -->
+
+      <ul class="navbar-nav ml-5" style="position: relative; left: 10%"></ul>
+      <ul class="navbar-nav ml-auto">
+        <li>
+          <a
+            class="nav-link"
+            style="font-weight: bold"
+            routerLink="/nos-produits-filtree/0/0/0/0/0/0"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i> Rechercher une piéce
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" style="font-weight: bold" routerLink="/actualite">
+            <i class="fa fa-question-circle" aria-hidden="true"></i>
+            Question/Reponse
+          </a>
+        </li>
+        <li *ngIf="!authService.isloggedIn">
+          <a class="nav-link" style="font-weight: bold" routerLink="/sign-up">
+            <i class="fa fa-user-plus"></i> S'inscrire
+          </a>
+        </li>
+        <li>
+          <a
+            *ngIf="!authService.isloggedIn"
+            class="nav-link"
+            routerLink="/login"
+            style="font-weight: bold"
+          >
+            <i class="fa fa-sign-in"></i> &nbsp;S'identifier</a
+          >
+        </li>
+
+        <div *ngIf="!authService.isloggedIn">
+          <button
+            class="btn btn-outline-warning"
+            type="button"
+            routerLink="/login"
+          >
+            Publier votre annonce!
+          </button>
+        </div>
+
+        <div *ngIf="authService.isloggedIn">
+          <app-ajouter-produit-front
+            [addButton]="addButton"
+            style="z-index: 9999"
+          ></app-ajouter-produit-front>
+          <!-- <button class="btn btn-outline-warning mr-1" type="button" routerLink="/creer-annonce">
+                Publier votre annonce!
+            </button> -->
+        </div>
+        <div
+          *ngIf="authService.isloggedIn && messagesRecevedUnread?.length === 0"
+        >
+          <button
+            type="button"
+            class="btn btn-outline-danger dropdown-toggle"
+            style="border: none"
+            data-toggle="dropdown"
+            id="dropdownMenuButton2"
+            aria-haspopup="true"
+            aria-expanded="false"
+            routerLink="/discussions"
+          >
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div
+          *ngIf="authService.isloggedIn && messagesRecevedUnread?.length > 0"
+        >
+          <button
+            type="button"
+            class="btn btn-outline-danger dropdown-toggle"
+            style="border: none"
+            data-toggle="dropdown"
+            id="dropdownMenuButton2"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span
+              *ngIf="messagesRecevedUnread?.length > 0"
+              class="badge"
+              style="position: absolute; top: 5px; right: 19%"
+            >
+              {{ messagesRecevedUnread?.length }}
+            </span>
+          </button>
+          <div
+            class="dropdown-menu"
+            style="
+              width: 20%;
+              border-radius: 10px;
+              left: 71%;
+              top: 78%;
+              background-color: #f9f9f9df;
+            "
+          >
+            <div
+              *ngFor="let m of messagesRecevedUnread"
+              style="display: flex; align-items: center; align-items: center"
+            >
+              <div
+                style="
+                  list-style-type: none;
+                  padding: 0;
+                  margin: 0;
+                  width: 100%;
+                  left: 0%;
+                "
+                class="mb-1 ml-1"
+              >
+                <form
+                  [formGroup]="this.messageService.dataForm2"
+                  (ngSubmit)="onSubmit(m)"
+                >
+                  <input
+                    type="hidden"
+                    formControlName="id"
+                    id="id"
+                    [(ngModel)]="m.id"
+                  />
+
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="vu"
+                      id=""
+                      hidden
+                    />
+                  </div>
+
+                  <button type="submit" style="border: none; width: 97%">
+                    <div style="display: flex; background-color: #f9f9f985">
+                      <div>
+                        <div *ngIf="m.auteur.filename === null">
+                          <a (click)="toDiscussion(m.auteur.username)">
+                            <img
+                              class="card-img-top img-responsive rounded-circle image-user"
+                              src="../../../assets/images/user1.png"
+                              style="height: 50px; width: 50px"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+                        <div *ngIf="m.auteur.filename !== null">
+                          <a (click)="toDiscussion(m.auteur.username)">
+                            <img
+                              class="card-img-top img-responsive rounded-circle image-user"
+                              src="{{
+                                'http://localhost:8081/api/ImgUser/' +
+                                  m.auteur.user_id
+                              }}"
+                              style="height: 50px; width: 50px"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+                      </div>
+                      <div
+                        class="ml-2"
+                        *ngIf="
+                          this.authService.loggedUser !== m.auteur.username
+                        "
+                      >
+                        <b>{{ m.auteur.prenom }} {{ m.auteur.nom }}</b> <br />
+                        <p>{{ m.message }}</p>
+                        <a (click)="toDiscussion(m.auteur.username)"
+                          ><small><b>répondre</b></small></a
+                        >
+                      </div>
+                    </div>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <a routerLink="/discussions">voir tout</a>
+          </div>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-danger dropdown-toggle"
+            style="border: none"
+            data-toggle="dropdown"
+            *ngIf="authService.isloggedIn"
+            style="border: none"
+            routerLink="/cart"
+          >
+            <i
+              class="fa fa-shopping-cart"
+              aria-hidden="true"
+              style="font-size: 25px"
+            ></i>
+
+            <span
+              *ngIf="carts?.length > 0"
+              class="badge"
+              style="position: absolute; top: 5px; right: 15%"
+              >{{ carts?.length }}</span
+            >
+          </button>
+        </div>
+
+        <div *ngIf="authService.isloggedIn" class="dropdown">
+          <button
+            class="btn btn-light dropdown-toggle ml-5"
+            style="
+              font-weight: bold;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <div style="display: flex">
+              <div *ngIf="user?.filename === null">
+                <img
+                  class="img-responsive rounded-circle"
+                  src="../../../assets/images/user1.png"
+                  style="height: 40px; width: 40px"
+                  alt=""
+                />
+              </div>
+              <div *ngIf="user?.filename !== null">
+                <img
+                  class="img-responsive rounded-circle"
+                  src="{{
+                    'http://localhost:8081/api/ImgUser/' + user.user_id
+                  }}"
+                  style="height: 40px; width: 40px"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <!-- {{ user?.prenom }} {{ user?.nom }} -->
+          </button>
+          <div
+            class="dropdown-menu"
+            style="border-radius: 10px; background-color: #e9ebeddf; left: -32%"
+            aria-labelledby="dropdownMenu2"
+          >
+            <button class="dropdown-item" type="button">
+              <a
+                *ngIf="authService.isAdmin()"
+                class="user_options"
+                routerLink="/produits"
+              >
+                <i class="fa fa-tachometer"></i> &nbsp;Dashboard</a
+              >
+            </button>
+            <button class="dropdown-item" type="button">
+              <a
+                *ngIf="authService.isloggedIn"
+                class="user_options"
+                (click)="viewProfile()"
+              >
+                <i class="fa fa-user"></i> &nbsp;Mon compte</a
+              >
+            </button>
+            <button class="dropdown-item" type="button">
+              <a
+                *ngIf="authService.isloggedIn"
+                class="user_options"
+                routerLink="/update-password"
+              >
+                <i class="fa fa-key"></i> &nbsp;Changer mot de passe</a
+              >
+            </button>
+
+            <button class="dropdown-item" type="button">
+              <a
+                *ngIf="authService.isloggedIn"
+                (click)="logout()"
+                class="user_options"
+                routerLink="/login"
+              >
+                <i class="fa fa-sign-out"></i> &nbsp;deconnexion</a
+              >
+            </button>
+          </div>
+        </div>
+      </ul>
+    </nav>
+  </body>
+</html>

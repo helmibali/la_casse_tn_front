@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<div class="body" style="background-color:#e9ebedaf;">
+    <div class="card signup-card  shadow">
+        <div >
+            <div class="">
+                <div class="alert alert-danger" *ngIf="err==1">
+                    <strong>login ou mot de passe erronés..</strong>
+                </div>
+                    
+                <form>
+                    <div class="row justify-content-md-center mt-5">
+                        <h3>S'identifier</h3><br>
+                        <p>Tenez-vous au courant dans l'univers de rechange</p>
+                    </div>
+
+                    <div class="form-group mt-2" style="width:80% ;margin: auto;">
+                        
+                        <input type="text" name="username" class="form-control" [(ngModel)]="user.username" placeholder="Email ou username">
+                    </div>
+                    <div class="form-group mt-2" style="width:80% ;margin: auto;">
+                        
+                        <input type="password" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Mot de passe">
+                    </div>
+                    <div class="row justify-content-md-center " >
+                        <button style="width:80%;margin: auto; border-radius: 20px;" type="button" (click)="onLoggedin()" class="btn btn-primary mt-3">Connexion</button>
+                    </div>
+                    
+                </form>
+
+                <div class="row justify-content-md-center mt-1">
+                    
+                    <p>____________ ou ____________</p><br>
+                    <p></p>
+                </div>
+                
+           <div class="row justify-content-md-center">
+            <button class="btn btn-light google-sign-in mt-3  mb-3"
+            style="width:80%;margin: auto;border-radius: 20px;border: 1px solid rgb(147, 142, 142);"
+            (click)="signInHandler()">
+              <img [src]="'../../../assets/images/Google.svg.png'" width="30" alt="google"/>
+              <span> S'identifier avec Google</span>
+            </button>
+           </div>
+               
+           
+            </div>
+        </div>
+     </div>
+     Vous débutez sur LaCasse.tn ? <a type="button" routerLink="/sign-up">S’inscrire</a> 
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,239 @@
+<div class="n">
+  <app-navbar></app-navbar>
+</div>
+<div
+  class="all"
+  style="background-color: #e9ebedaf; width: 100%; display: flex"
+>
+  <div class="card mt-5 mb-5">
+    <div class="row">
+      <div class="col-md-8 cart">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="title">
+          <div class="row">
+            <div class="col">
+              <h4><b>pièces sélectionnés</b></h4>
+            </div>
+            <div class="col align-self-center text-right text-muted">
+              {{ carts.length }} pièces
+            </div>
+          </div>
+        </div>
+        <div  class="row border-top border-bottom"  *ngFor="let c of carts">
+          <div class="row main align-items-center">
+            <div class="col-2">
+              <img
+                class="img-fluid"
+                src="{{
+                  'http://localhost:8081/api/imgp/' + c.produit.idProduit
+                }}"
+              />
+            </div>
+            <div class="col">
+              <div class="row text-muted">
+                {{ c.produit.categorie.nomCategorie }}
+              </div>
+              <div class="row">{{ c.produit.nomProduit }}</div>
+              <a
+                *ngIf="authService.isloggedIn"
+                class="btn btn-outline-danger"
+                (click)="supprimerCart(c)"
+              >
+                <i class="fa fa-trash"></i
+              ></a>
+            </div>
+            <!-- <div class="col">
+                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                    </div> -->
+            <div class="col">
+              {{ c.produit.prixProduit | currency: "TND":"symbol" }}
+              <span class="close"></span>
+            </div>
+          </div>
+        </div>
+
+        <div type="button " (click)="backClicked()" class="close back-to-shop">
+          <span class="text-muted">Back to shop</span>
+        </div>
+      </div>
+      <div class="col-md-4 summary">
+        <div>
+          <h5><b>Sommaire</b></h5>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col" style="padding-left: 0">
+            {{ carts.length }} pièces
+          </div>
+          <div class="col text-right">
+            {{ prixCart() | currency: "TND":"symbol" }}
+          </div>
+        </div>
+
+
+
+        
+        <form [formGroup]="this.commandeService.dataForm" (ngSubmit)="addToCart()">
+          <input type="hidden"  formControlName="id" id="id">
+          <p>Livreur</p>
+          <select formControlName="livraison">
+            <option class="text-muted">Aramex</option>
+            <option class="text-muted">Méthode Personnel</option>
+            <option class="text-muted">Autre</option>
+          </select>
+          <p>Adresse</p>
+          <div class="localisation" style="display:flex;" >
+            
+            <select (change)="onSelectGov($event)">
+              <option class="text-muted" value="0">Gouvernorat</option>
+              <option
+                class="text-muted"
+                *ngFor="let g of gouvernorats"
+                [value]="g.id"
+              >
+                {{ g.libelle }}
+              </option>
+            </select>
+
+            
+            <select formControlName="delegation" aria-placeholder="Delegation">
+              <option class="text-muted" value="0">Delegation</option>
+              <option
+                class="text-muted"
+                *ngFor="let d of delegations"
+                [value]="d.id"
+              >
+                {{ d.libelle }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+        
+        <input type="text" class="form-control" formControlName="dateCreation" id="" hidden>
+      </div>
+      <div class="form-group">
+        
+          <input type="text" class="form-control" formControlName="user" id=""hidden>
+        </div>
+  
+        <div class="form-group" >
+        
+          <input type="text" class="form-control" formControlName="address" id="" placeholder="Saisir votre adresse">
+        </div>
+  
+        <div class="form-group" >
+        
+          <input type="text" class="form-control" formControlName="prixCommande" id="" hidden>
+        </div>
+        <div class="form-group">
+        
+          <input type="text" class="form-control" formControlName="qty" id="" hidden>
+        </div>
+          <div class="form-group"  style="width:47%; margin:auto;;
+          position: relative;" hidden>
+         
+            <ng-multiselect-dropdown formControlName="carts"
+          [placeholder]="'carts'"
+          [settings]="dropdownSettings"
+          [data]="carts"
+          (onSelect)="onItemSelect($event)"
+          [(ngModel)]="selectedCarts"
+          
+          >
+          </ng-multiselect-dropdown>
+          
+        </div> 
+
+          <div
+          class="row"
+          style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0"
+        >
+          <div class="col">Prix Totale</div>
+          <div class="col text-right">
+            {{ prixCart() | currency: "TND":"symbol" }}
+          </div>
+        </div>
+        <button type="submit" class="btn btn-danger text-uppercase mr-2 px-4">
+          Passer une commande
+        </button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="container" style="margin-left:20%;position: absolute;">
+  <form [formGroup]="this.commandeService.dataForm" (ngSubmit)="addToCart()">
+      <input type="hidden"  formControlName="id" id="id">
+    
+     
+     
+      <div class="form-group"
+      >
+        
+        <input type="text" class="form-control" formControlName="dateCreation" id="">
+      </div>
+      <div class="form-group">
+        
+          <input type="text" class="form-control" formControlName="user" id="">
+        </div>
+  
+        <div class="form-group" >
+        
+          <input type="text" class="form-control" formControlName="adresse" id="">
+        </div>
+  
+        <div class="form-group" >
+        
+          <input type="text" class="form-control" formControlName="prixCommande" id="">
+        </div>
+        <div class="form-group">
+        
+          <input type="text" class="form-control" formControlName="qty" id="">
+        </div>
+
+        <div class="localisation" style="display:flex;" >
+            
+          <select (change)="onSelectGov($event)">
+            <option class="text-muted" value="0">Gouvernorat</option>
+            <option
+              class="text-muted"
+              *ngFor="let g of gouvernorats"
+              [value]="g.id"
+            >
+              {{ g.libelle }}
+            </option>
+          </select>
+
+          
+          <select formControlName="delegation" aria-placeholder="Delegation">
+            <option class="text-muted" value="0">Delegation</option>
+            <option
+              class="text-muted"
+              *ngFor="let d of delegations"
+              [value]="d.id"
+            >
+              {{ d.libelle }}
+            </option>
+          </select>
+        </div>
+  
+      
+      <div class="form-group"
+       style=
+       "position: absolute;
+       top: -100px;
+      left: 63%;">
+        <button type="submit"  class="btn btn-danger text-uppercase mr-2 px-4"><i class="fa fa-tasks" aria-hidden="true"></i> Commander</button>
+      </div>
+  
+  
+    </form></div> -->
+<app-footer></app-footer>

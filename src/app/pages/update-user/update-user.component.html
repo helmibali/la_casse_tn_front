@@ -1,0 +1,40 @@
+
+<app-dashboard></app-dashboard>
+<div class="container tab">
+  <h3> Modifier les autorisations de l'utilisateur </h3>
+    <form >
+
+    <div class="form-group">
+        <label>
+            Nom:
+        </label>
+        <input id="nom" class="form-control" type="text" name="nom" [(ngModel)]="currentUser.nom">
+      </div>
+
+      <div class="form-group">
+        <label>
+            Prenom:
+        </label>
+        <input id="prenom" class="form-control" type="text" name="prenom" [(ngModel)]="currentUser.prenom">
+      </div>
+
+    
+      <div class="form-group drop-container mt-4" >
+             <ng-multiselect-dropdown 
+           [placeholder]="''"
+           [settings]="dropdownSettings"
+           [data]="roles"
+           (onSelect)="onItemSelect($event)"
+           [(ngModel)]="currentUser.roles"
+           [ngModelOptions]="{standalone: true}"
+           >
+           </ng-multiselect-dropdown> 
+         </div>
+
+         <div class="form-group mt-4"> 
+
+        <button class="btn btn-outline-success" type="submit" (click)="updateData()"><i class="fa fa-database"></i> modifier</button>
+        <button class="btn btn-outline-danger" routerLink="/utilisateurs"><i class="fa fa-arrow-left" aria-hidden="true"></i>retour</button>
+      </div>
+      </form>
+</div>

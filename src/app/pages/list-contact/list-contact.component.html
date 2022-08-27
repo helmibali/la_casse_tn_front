@@ -1,0 +1,42 @@
+<app-dashboard></app-dashboard>
+<div class="entete">
+  <h5 class="text-center mt-1">Les formulaires de contact</h5>
+
+</div>
+
+<!-- tableau de Produits -->
+
+<div class="container tab">
+    <div class="card shadow mb-2">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">prenom</th>
+        <th scope="col">nom</th>
+        <th scope="col">email</th>
+        <th scope="col">message</th>
+        <th colspan="2" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of contacts">
+        <td>{{c.id}}</td>
+        <td>{{c.prenom}}</td>
+        <td>{{c.nom}}</td>
+        <td>{{c.email}}</td>
+        <td>{{c.message}}</td>
+        <td><a  class="btn btn-outline-danger" >
+          <i class="fa fa-trash"></i></a></td>
+        <td><a  class="btn btn-outline-secondary">
+          <i class="fa fa-edit"></i></a>
+        </td>
+    </tr>
+  </tbody>
+</table>
+   
+  
+</div>
+</div>
+
+

@@ -1,0 +1,20 @@
+.global{
+    display: flex;
+}
+
+.contact-form{
+   
+    width: 100%;
+}
+
+.maps{
+    width: 100%;
+    display: flex;
+}
+.form-int{
+    width: 60%;
+    margin: auto;
+}
+iframe {
+    width:100%
+}

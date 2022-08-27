@@ -1,0 +1,48 @@
+<div class="mt-1 coomment">
+  <div *ngIf="cmt.user.filename === null">
+    <img class="card-img-top img-responsive rounded-circle image-user"
+    src =  "../../../assets/images/user.png" 
+    style = "height :38px;width:22px"
+   alt="">
+  </div>
+  <div div *ngIf="cmt.user.filename !== null">
+    <img class="card-img-top img-responsive rounded-circle image-user"
+    src = "{{'http://localhost:8081/api/ImgUser/'+cmt.user.user_id}}" 
+    style = "height :38px;width:22px"
+   alt="">
+  </div>
+
+<div class="commentaire p-1 card">
+  <div class="user">
+    <p  style="font-weight:bold;"> {{cmt.user.prenom}} {{cmt.user.nom}}:  </p>
+  </div> 
+  <div class="text">
+    <p>  {{cmt.texte}}</p>
+  
+  </div>
+
+</div><br/>
+<small>{{cmt.dateComment | date:'short'}}</small>
+
+
+<div>
+   
+    <div *ngIf="canEdit"
+    (click)="setActiveComment.emit({ id: cmt.id, type: activeCommentType.editing })"
+    >Modifier</div>
+    <div
+     *ngIf="canDelete"
+     (click)="deleteComment.emit(cmt.id)"
+     ><td><a>
+      <i class="fa fa-trash"></i></a></td></div>
+  
+  </div>
+
+ 
+
+ 
+</div>
+
+
+
+  

@@ -1,0 +1,62 @@
+<app-navbar *ngIf="!authService.isAdmin()"></app-navbar>
+<app-dashboard *ngIf="authService.isAdmin()"></app-dashboard>
+<div class="entete">
+  <h5 class="text-center mt-1">Liste des produits</h5>
+<div class="ajouter mt-1"><a class="btn btn-primary" routerLink="/ajouter"><i class="fa fa-plus"></i>&nbsp; Ajouter</a></div>
+<app-ajouter-produit-front [addButton]="addButton"></app-ajouter-produit-front>
+</div>
+
+<!-- tableau de Produits -->
+
+<div class="container tab">
+    <div class="card shadow mb-4">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">nom</th>
+        <th scope="col">prix</th>
+        <th scope="col">date création</th>
+        <th scope="col">categorie</th>
+        <th scope="col">modele</th>
+        <th colspan="2" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let produit of produits | paginate: {itemsPerPage: 9, currentPage: p }">
+      <td>
+        <a href="#"><img class="card-img-top img-responsive rounded-circle"
+            src = "{{'http://localhost:8081/api/imgp/'+produit.idProduit}}" 
+            style = "height :70px;width:50px"
+           alt=""></a>
+    </td> 
+        <td>{{produit.nomProduit}}</td>
+        <td>{{produit.prixProduit}}</td>
+        <td>{{produit.dateCreation|date:'dd/MM/yyyy'}}</td> 
+        <td>{{ produit.categorie.nomCategorie }}</td>
+      
+        <td>
+          <!-- <ul  *ngFor="let modele of produit.modeles">
+            <li>
+                {{ modele.libelleModele }}  {{modele.marque.libelleMarque}}
+            </li>
+          </ul> -->
+
+          <ul class="list-group" *ngFor="let modele of produit.modeles">
+            <li class="list-group-item">{{ modele.libelleModele }} [{{modele.marque.libelleMarque}}] </li>
+          </ul>
+        </td>
+       
+        <td><a *ngIf="authService.isAdmin()" class="btn btn-outline-danger" (click)="supprimerProduit(produit)">
+          <i class="fa fa-trash"></i></a></td>
+        <td><a *ngIf="authService.isAdmin()" class="btn btn-outline-secondary" [routerLink]="['/updateProduit',produit.idProduit]">
+          <i class="fa fa-edit"></i></a>
+        </td>
+    </tr>
+  </tbody>
+</table>
+   
+  
+</div>
+<pagination-controls (pageChange)="p =$event"></pagination-controls>
+</div>

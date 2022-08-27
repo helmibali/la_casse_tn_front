@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<form class="container mt-5 mb-5">
+    <h1 class="text-center">S'inscrire</h1>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Prénom</label>
+      <input type="text" [(ngModel)]="newUser.prenom" [ngModelOptions]="{standalone: true}" class="form-control" id="prenom"  placeholder="Merci de saisir votre prénom">
+      
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Nom</label>
+        <input type="text" [(ngModel)]="newUser.nom" [ngModelOptions]="{standalone: true}" class="form-control" id="nom"  placeholder="Merci de saisir votre nom">
+       
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Date de naissance</label>
+        <input type="date" [(ngModel)]="newUser.naissance" [ngModelOptions]="{standalone: true}" class="form-control" id="nom"  placeholder="jour/mois/année">
+       
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" [(ngModel)]="newUser.username" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleInputEmail1"  placeholder="Merci de saisir votre email">
+      </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">mot de passe</label>
+      <input type="password" [(ngModel)]="newUser.password" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleInputPassword1" placeholder="Merci de saisir votre mot de passe">
+    </div>
+   
+  
+    <button type="submit" (click)="ajoutUser()" class="btn btn-primary">S'inscrire</button>
+  </form>

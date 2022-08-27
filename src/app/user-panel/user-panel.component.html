@@ -1,0 +1,322 @@
+<div class="n"><app-navbar></app-navbar></div>
+<div style="background-color:#e9ebedaf ;">
+ 
+   
+        <div class="all">
+        <div class="profile">
+          <div style="width:100% ;position:sticky; top:80px;">
+            <div class="card mt-3 mb-3" style="width:70%;margin: auto;border-radius: 10px;">
+           
+              <div class="card-body" style="margin:auto;">
+                <div>
+                  <div *ngIf="user?.filename===null" style="display:flex ;align-items:center;" >
+                    <img src="../../../assets/images/user.png"  class="rounded-circle" 
+                    style="width: 90px;height:80px;margin:auto;" alt="...">
+                  </div>
+                  <div *ngIf="user?.filename!==null" style="display:flex ;align-items:center;">
+                    <img src="{{'http://localhost:8081/api/ImgUser/'+user.user_id}}"  class="rounded-circle" 
+                    style="width: 70px;height:80px;margin:auto;" alt="...">
+                  </div>
+                </div>
+                <h5 class="card-title" style="margin:auto ;" >{{user?.prenom}} {{user?.nom}}</h5>
+              </div>
+              <ul class="list-group list-group-flush mb-3">
+             
+                
+                <li class="list-group-item"*ngIf="user?.username !== this.authService.loggedUser "><i class="fa fa-phone"> {{user?.telephone}}</i></li>
+                <li class="list-group-item"*ngIf="user?.username !== this.authService.loggedUser "><i class="fa fa-envelope" aria-hidden="true"> {{user?.username}}</i></li>
+                <li class="list-group-item"*ngIf="user?.username !== this.authService.loggedUser "><i class="fa fa-map-marker" aria-hidden="true"> {{user?.delegation.libelle}},{{user?.delegation.gouvernorat.libelle}}</i></li>
+                <li class="list-group-item p-0 ml-2"*ngIf="user?.username === this.authService.loggedUser ">
+                    <div class="m-0" id="headingProduits">
+                        
+                        <button 
+                        class="btn btn-light"
+                        style="border:none;"
+                         type="button" data-toggle="collapse" 
+                         data-target="#mesproduits" 
+                         aria-expanded="false"
+                          aria-controls="mesproduits"
+                          (click)="scroll()">
+                          <b style="font-size:15px ;color: black;"> Mes produits actives {{produits?.length }}</b>
+                        </button>
+                      
+                    </div>
+                </li>
+                <li class="list-group-item p-0 ml-2"*ngIf="user?.username === this.authService.loggedUser ">
+                    <div class="m-0" id="headingTwo">
+                        
+                          <button 
+                          class="btn btn-light"
+                        style="border:none;"
+                           type="button" 
+                           data-toggle="collapse"
+                            data-target="#pcmd" 
+                            aria-expanded="false"
+                             aria-controls="pcmd"
+                             (click)="scroll()"
+                             ><b style="font-size:15px ;color: black;">Mes produits commandés {{cartsCmd?.length }}</b>
+                            
+                          </button>
+                        
+                      </div>
+                  <!-- <cartinCmd [cartsCmd]="cartsCmd"></cartinCmd> -->
+                </li>
+                <li class="list-group-item p-0 ml-2"*ngIf="user?.username === this.authService.loggedUser ">
+                    <div class="m-0" id="headingOne">
+                        
+                          <button 
+                          class="btn btn-light"
+                        style="border:none;" 
+                          type="button" 
+                          data-toggle="collapse" 
+                          data-target="#discussion"
+                           aria-expanded="true"
+                            aria-controls="collapseOne"
+                            (click)="scroll()">
+                            
+                            <b style="font-size:15px ;color: black;">  Mes commandes {{carts?.length }}</b>
+                          </button>
+                        
+                      </div>
+                </li>
+                <li class="list-group-item p-0 ml-2"*ngIf="user?.username === this.authService.loggedUser ">
+                    <div class="m-0" id="headingThree">
+                        
+                          <button 
+                          class="btn btn-light"
+                        style="border:none;"
+                           type="button" 
+                           data-toggle="collapse" 
+                           data-target="#mesmessages" 
+                           aria-expanded="false"
+                           
+                            (click)="scroll()">
+                            <b style="font-size:15px ;color: black;">Mes messsages</b>
+                          </button>
+                        
+                      </div>
+                </li>
+                <li class="list-group-item p-0 ml-2"*ngIf="user?.username === this.authService.loggedUser ">
+                    <div class="m-0" id="headingThree">
+                        
+                          <button 
+                          class="btn btn-light"
+                        style="border:none;"
+                           type="button" 
+                           data-toggle="collapse" 
+                           data-target="#mesposts" 
+                           aria-expanded="false"
+                           
+                            (click)="scroll()">
+                            <b style="font-size:15px ;color: black;">Mes posts</b>
+                          </button>
+                        
+                      </div>
+                </li>
+               
+                
+              </ul>
+            
+            </div>
+          </div>
+  
+        
+  
+          
+
+        
+  
+        </div>
+     
+      <div class="produits">
+        <!-- <div style="display:flex ;">
+          <div class="mt-4 mb-3" style="width: 60%;">
+            <input class="form-control form-control-lg recherche text-center"
+            style="border-radius: 10px;" 
+           type="search" 
+           placeholder="Recherche" 
+           aria-label="Search"
+            [(ngModel)]="term">
+          </div>
+
+          
+       <div class="ml-5" style="display:flex ;justify-content:center;align-items:center; width:15%" >
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Envoyer un message a {{user?.prenom}}
+          </button>
+          <div class="dropdown-menu p-2" style="border-radius:10px;left:71%;top:78%;background-color:rgb(231 215 215 / 88%);width:120%">
+            <div class="write mt-2">  
+
+              <form [formGroup]="this.messageService.dataForm" (ngSubmit)="onSubmit()">
+                <input type="hidden"  formControlName="id" id="id">
+      
+       
+                <div class="form-group">
+                  
+                  <input type="date" class="form-control" formControlName="dateCreation" id="" hidden>
+                </div>
+                <div class="form-group">
+                  
+                  <input type="text" class="form-control" formControlName="auteur" id="" hidden>
+                </div>
+                <div class="form-group">
+                  
+                    <input type="text" class="form-control" formControlName="emiter" id="" hidden>
+                  </div>
+                  <div class="form-group">
+                    <textarea 
+                    class="form-control mb-2"
+                     placeholder="ecrire un message..." 
+                     id="floatingTextarea"
+                      formControlName="message"
+                      ></textarea>
+                  </div>
+                
+                  <button 
+                  class="btn btn-primary"
+                   type="submit"
+                   
+                    >Envoyer
+                      
+                  </button>
+                  <button
+                
+                  type="button"
+                  class="btn "
+                  >
+                  Annuler
+              </button>
+              </form>
+            
+              </div>
+        </div>
+       </div>
+
+              
+
+        </div></div> -->
+        <!-- <span  class="badge badge-pill badge-light" style="color:rgb(239, 74, 74)">
+          
+           <h6 >Annonces actives pour {{user?.prenom}} {{user?.nom}} ({{produits?.length}})</h6> 
+           </span> -->
+           <div class="accordion mt-3" style="border:solid #b1b4b7ae 1px ;border-radius: 10px;" id="mon-compte-accordion">
+            <div class="card m-0" style="border-radius: 10px;margin:0;border:0;">
+              
+          
+              <div
+               id="discussion"
+                class="collapse" 
+                aria-labelledby="headingOne" 
+                data-parent="#mon-compte-accordion">
+                <div>
+                  
+                    <app-liste-cart [carts]="carts"  ></app-liste-cart>
+                    
+                </div>
+              </div>
+            </div>
+            <div class="card m-0" style="border-radius: 10px;margin:0;border:0;">
+          
+              <div id="pcmd"
+               class="collapse"
+                aria-labelledby="headingTwo"
+                 data-parent="#mon-compte-accordion">
+                <div>
+                    <cartinCmd [cartsCmd]="cartsCmd"></cartinCmd>
+                </div>
+              </div>
+            </div>
+            <div class="card m-0" style="border-radius: 10px;margin:0;border:0;">
+             
+              <div id="mesmessages" 
+              class="collapse" 
+              aria-labelledby="headingThree" 
+              data-parent="#mon-compte-accordion">
+                <div>
+                   <app-messages-all></app-messages-all>
+                </div>
+              </div>
+            </div>
+
+            <div class="card m-0" style="border-radius: 10px;margin:0;border:0;">
+             
+                <div id="mesproduits" 
+                class="collapse  show" 
+                aria-labelledby="headingProduits" 
+                data-parent="#mon-compte-accordion">
+                  <div>
+                    <app-produits-filtred
+                    [produits]="produits"
+                     [term]="term"
+                     ></app-produits-filtred>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card m-0" style="border-radius: 10px;margin:0;border:0;">
+             
+                <div id="mesposts" 
+                class="collapse" 
+                aria-labelledby="headingProduits" 
+                data-parent="#mon-compte-accordion">
+                  <div>
+                    <div class="container mt-4" style="margin:auto;width: 70% ;"  *ngFor="let a of articles">
+
+   
+
+
+   
+                        <div class="card" style="margin:auto ; border-radius: 10px;" >
+                          <div style="display:flex;margin-left:2%;margin-top:2%;">
+                            <div *ngIf="a.user.filename !== null" >
+                              <img class="card-img-top img-responsive rounded-circle"
+                              src = "{{'http://localhost:8081/api/ImgUser/'+a.user.user_id}}" 
+                              style = "height :70px;width:35px;"
+                             alt="">
+                            </div>
+                            <div *ngIf="a.user.filename === null">
+                              <img class="card-img-top img-responsive rounded-circle"
+                              src = "../../../assets/images/user.png" 
+                              style = "height :70px;width:35px;"
+                             alt="">
+                            </div>
+                             
+                      <div style="margin-left:2% ;margin-top:2%;">
+                        <div style="font-weight : bold ;">{{a.user.prenom}} {{a.user.nom}}</div>
+                        <div><p class="card-text" style="margin:auto ;"><small class="text-muted">{{a.dateCreation | date:'medium'}}</small></p> </div> 
+                      </div>
+                             
+                          </div>
+                          <div class="card-body" style="">
+                            <h5 class="card-title" style="margin:auto ;">{{a.title}}</h5>
+                            <p class="card-text" style="margin:auto ;">{{a.text}}  {{a.user.user_id}} </p>
+                            <!-- <p class="card-text" style="margin:auto ;"><small class="text-muted">{{a.dateCreation | date:'medium'}}</small></p> -->
+                          </div>
+                          <div class="mb-2" *ngIf="a.filename !== null" style = "height :300px;width:100%;  margin:auto ; display: flex;">
+                            <img class="card-img-top img-responsive"
+                            src = "{{'http://localhost:8081/api/imga/'+a.id}}" 
+                            style = "height :300px;width:90%; margin:auto ; "
+                           alt="">
+                          </div>
+                          
+                        </div>
+                  
+                        <app-comments [a] = "a"></app-comments>
+                     
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+
+          </div>
+        
+        </div>
+
+
+       
+  </div>
+</div>
+
+<app-footer></app-footer>

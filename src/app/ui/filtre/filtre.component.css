@@ -1,0 +1,12 @@
+.filtre{
+    display: flex;
+    width: 15%;
+    background-color: #c3c1c1;
+    height: 100vh;
+}
+
+#marque{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}

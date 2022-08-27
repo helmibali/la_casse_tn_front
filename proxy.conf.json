@@ -1,0 +1,6 @@
+{
+    "/api/": {
+      "target": "http://tunningapplication.herokuapp.com",
+      "secure": false
+    }
+  }

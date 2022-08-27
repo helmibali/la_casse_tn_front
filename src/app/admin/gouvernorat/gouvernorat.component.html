@@ -1,0 +1,28 @@
+<app-dashboard></app-dashboard>
+<div class="entete">
+  <h5 class="text-center mt-1">Liste des gouvernorats</h5>
+  <div class="ajouter mt-1">
+    <app-add-gouvernorat></app-add-gouvernorat>
+  </div>
+
+</div>
+<!-- tableau de Produits -->
+<div class="container tab">
+    <div class="card shadow mb-4">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Libellé</th>
+  
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let g of gouvernorats">
+        <td>{{g.id}}</td>
+        <td>{{g.libelle}}</td> 
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>

@@ -1,0 +1,101 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="body" style="background-color:#e9ebedaf;">
+  <div class="title">
+    <img src="../../../assets/images/logo2.png" alt="">
+   </div>
+  <div class="card signup-card " >
+    <div class="row justify-content-md-center mt-3 mb-3">
+        <div class="">
+          <div class="alert alert-danger" *ngIf="usernames?.length  !== 0">
+            <p>
+              {{socialUser.email}} est déjà utilisé.<br/>Merci de verifier!
+            </p>
+          </div>
+          
+                
+            <form [formGroup]="this.userService.dataForm" (ngSubmit)="addData()" >
+               <div *ngIf="usernames?.length  === 0">
+                <p><b>{{socialUser?.name }}</b> </p>
+               </div>
+                
+               <div class="form-group" style="width:90%; margin:auto;" *ngIf="usernames?.length  === 0">
+                <label>téléphone: </label>
+                <input type="text" class="form-control" formControlName="telephone" id="telephone" placeholder="+216 xx xxx xxx">
+               
+              </div>
+               
+              <div class="localisation mb-3"style="display:flex;width: 90%;margin: auto;" *ngIf="usernames?.length  === 0">
+                <div class="form-group" style="width:47%; margin:auto;"> 
+                  <label>Gouvernorat :</label> 
+                    <select class="custom-select custom-select-sm" (change)="onSelectGov($event)">
+                      <option value="0"></option>
+                      <option *ngFor="let g of gouvernorats" [value]="g.id">{{g.libelle}}</option>
+                    </select>
+              </div> 
+        
+              <div class="form-group" style="width:47%; margin:auto;" *ngIf="usernames?.length  === 0"> 
+                <label>Delegation :</label> 
+                  <select class="custom-select custom-select-sm" formControlName="delegation_id">
+                    <option value="0"></option>
+                    <option *ngFor="let d of delegations" [value]="d.id">{{d.libelle}}</option>
+                  </select>
+                  
+            </div> 
+          </div>
+
+
+
+                <div class="form-group"hidden>
+                    
+                    <input type="text" formControlName="prenom" name="prenom" class="form-control"  hidden>
+                </div>
+                <div class="form-group"hidden>
+                    
+                    <input type="text"formControlName="nom" name="nom" class="form-control" hidden>
+                </div>
+                <div class="form-group" hidden>
+                    
+                    <input type="text" formControlName="photoUrl" name="prenom" class="form-control"  hidden>
+                </div>
+                <div class="form-group" hidden>
+                    <label>Nom Utilisateur :</label>
+                    <input type="text" formControlName="username" name="username" class="form-control"  hidden>
+                </div>
+                <div class="form-group" hidden>
+                    <label>Mot de passe :</label>
+                    <input type="password" formControlName="password" name="password"  class="form-control" hidden>
+                </div>
+                <div class="form-group"  style="width:47%; margin:auto;;
+      position: relative;" hidden>
+     
+        <ng-multiselect-dropdown formControlName="roles"
+      [placeholder]="'roles'"
+      [settings]="dropdownSettings"
+      [data]="roles"
+      (onSelect)="onItemSelect($event)"
+      [(ngModel)]="selectedRoles"
+      
+      >
+      </ng-multiselect-dropdown>
+      
+    </div> 
+
+                <div class="row justify-content-md-center" *ngIf="usernames?.length  === 0" >
+                    <button type="submit"  class="btn btn-success">S'inscrire</button>
+                </div>
+                <div class="d-flex align-items-center"> <a type="button" (click)="backClicked()"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Retour</span> </a>
+                                 
+                </div> 
+                
+            </form>
+            
+       
+           
+       
+        </div>
+    </div>
+ </div>
+</div>
+<app-footer></app-footer>
+
+ 

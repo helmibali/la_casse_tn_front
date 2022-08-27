@@ -1,0 +1,104 @@
+<div class="n">
+  <app-navbar></app-navbar>
+</div>
+<div class="all" style="background-color:#e9ebedaf; width:100%;display: flex;">
+
+
+  <div class="container mt-5 mb-5" >
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="images p-3">
+                            <div class="text-center p-4"> <img id="main-image" src="{{'http://localhost:8081/api/imgp/'+produit.idProduit}}" width="250" /> </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center"> <a (click)="backClicked()"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Retour</span> </a>
+                                 
+                                </div> 
+                            </div>
+                            <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">Catégorie: {{produit?.categorie.nomCategorie}}</span>
+                                <h5 class="text-uppercase">{{  produit?.nomProduit }}</h5>
+                                <div class="price d-flex flex-row align-items-center"> <span class="act-price"> Prix: {{ produit?.prixProduit}} TND</span>
+                                    <div class="ml-2"> <small class="dis-price"></small>
+                                </div>
+                            </div>
+                            <p class="about">
+                              Description: {{produit?.description}}</p>
+                              <div class="d-flex flex-column" *ngFor="let m of produit.modeles">
+                                <small class="text-muted mb-1">Marque:</small>
+                                <div class="d-flex flex-row">
+                                <img src="{{'http://localhost:8081/api/ImgMarque/'+m.marque.id}}" width="35px" height="25px">
+                                <div class="d-flex flex-column ml-1">
+                                    <small class="ghj">Modéle: {{m.libelleModele}} </small></div></div></div>
+                                    <a class="badge badge-primary ml-5" [routerLink]="['/profile',produit.user.user_id]" style="width:30%;">
+                                      {{produit.user.prenom}} {{produit.user.nom}}
+                                     </a>
+                            <div class="cart mt-4 align-items-center">
+
+                                <button class="btn btn-danger text-uppercase mr-2 px-4" hidden>Commander</button> 
+                                <div class="text-center mt-1" *ngIf="isLoading != false">
+                                  <div class="card shadow mb-4">
+                                        <span class="visually-hidden">Loading...</span>
+                                      </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+</div>
+
+
+<div class="container" style="margin-left:20%;position: absolute;">
+    <form [formGroup]="this.cartService.dataForm" (ngSubmit)="addToCart()">
+        <input type="hidden"  formControlName="id" id="id">
+      
+       
+       
+        <div class="form-group"hidden>
+          
+          <input type="text" class="form-control" formControlName="dateCreation" id="">
+        </div>
+        <div class="form-group"hidden>
+          
+            <input type="text" class="form-control" formControlName="user" id="">
+          </div>
+    
+          <div class="form-group" hidden>
+          
+            <input type="text" class="form-control" formControlName="produit" id="">
+          </div>
+    
+          <div class="form-group" hidden>
+          
+            <input type="text" class="form-control" formControlName="prix" id="">
+          </div>
+    
+        
+        <div class="form-group"
+         style=
+         "position: absolute;
+         top: -100px;
+        left: 63%;">
+          <button type="submit"  class="btn btn-danger text-uppercase mr-2 px-4"><i class="fa fa-tasks" aria-hidden="true"></i> Commander</button>
+        </div>
+    
+    
+      </form></div>
+    
+<app-footer></app-footer>

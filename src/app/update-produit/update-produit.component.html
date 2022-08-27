@@ -1,0 +1,77 @@
+<app-dashboard></app-dashboard>
+
+ 
+  <div class="container tab card shadow mb-4 tab" style= "margin-left:20%;">
+    <form [formGroup]="this.produitService.dataForm" (ngSubmit)="onSubmit()">
+      <h5 class="text-center mt-1">Liste des produits</h5>
+
+        
+
+
+          <div>
+            <label for="nomProduit">
+                libelle Produit
+            </label>
+            <input id="nomProduit" type="text" formControlName="nomProduit">
+          </div>
+
+          <div>
+            <label for="prixProduit">
+                Prix Produit
+            </label>
+            <input id="prixProduit" type="number" formControlName="prixProduit">
+          </div>
+
+          <div>
+            <label for="dateCreation">
+                Date creation Produit
+            </label>
+            <input id="dateCreation" type="date" formControlName="dateCreation">
+          </div>
+
+
+
+         
+
+          <div>
+              <label>Categorie</label>
+              <select  id="categorie_id" formControlName="categorie_id">
+                  <option *ngFor="let c of categories" [value]="c.id">
+                      {{c.nomCategorie}}
+                  </option>
+              </select>
+          </div>
+
+         
+
+      
+        <div class="drop-container">
+        
+              <ng-multiselect-dropdown formControlName="modeles"
+            [placeholder]="''"
+            [settings]="dropdownSettings"
+            [data]="modeles"
+            (onSelect)="onItemSelect($event)"
+            >
+            </ng-multiselect-dropdown>
+         
+            
+          </div>
+
+       
+
+
+
+          <div class="form-group">
+            <label>Uploader Une image</label>
+                <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                <img [src]="imgURL" height="200" *ngIf="imgURL">
+        </div>
+
+
+          <button class="button" type="submit">Ajouter</button>
+          <button class="button" routerLink="/produits">retour</button>
+    </form>
+</div>
+   
+

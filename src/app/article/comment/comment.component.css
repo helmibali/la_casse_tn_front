@@ -1,0 +1,16 @@
+.coomment{
+    display: flex;
+}
+
+.image-user{
+
+}
+
+.commentaire{
+    background-color: #e6e5e5e0;
+    display: flex;
+    flex-direction: row;
+}
+.user{
+
+}

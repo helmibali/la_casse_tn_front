@@ -1,0 +1,69 @@
+<app-dashboard></app-dashboard>
+
+ 
+  <div class="container tab card shadow mb-4 tab">
+    <form [formGroup]="this.produitService.dataForm" (ngSubmit)="onSubmit()">
+      <h5 class="text-center mt-1">Liste des produits</h5>
+
+       
+
+
+          <div>
+            <label for="nomProduit">
+                libelle Produit
+            </label>
+            <input id="nomProduit" type="text" formControlName="nomProduit">
+          </div>
+
+          <div>
+            <label for="prixProduit">
+                Prix Produit
+            </label>
+            <input id="prixProduit" type="number" formControlName="prixProduit">
+          </div>
+
+         
+
+          <div>
+              <label>Categorie</label>
+              <select  id="categorie_id" formControlName="categorie_id">
+                  <option *ngFor="let c of categories" [value]="c.id">
+                      {{c.nomCategorie}}
+                  </option>
+              </select>
+          </div>
+
+          
+
+      
+        <div class="drop-container">
+         <!-- <form [formGroup]="form"> -->
+              <ng-multiselect-dropdown formControlName="modeles"
+            [placeholder]="''"
+            [settings]="dropdownSettings"
+            [data]="modeles"
+            (onSelect)="onItemSelect($event)"
+            >
+            </ng-multiselect-dropdown>
+            <!-- </form> -->
+            <!-- <div class="action">
+              <button (click)="handleButtonClick()">Press button</button>
+            </div> -->
+            
+          </div>
+
+       
+
+
+
+          <div class="form-group">
+            <label>File Upload  </label>
+                <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                <img [src]="imgURL" height="200" *ngIf="imgURL">
+        </div>
+
+
+          <button class="button" type="submit">Ajouter</button>
+    </form>
+</div>
+   

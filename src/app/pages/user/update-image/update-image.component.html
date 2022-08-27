@@ -1,0 +1,33 @@
+<app-dashboard></app-dashboard>
+
+
+<div class="container tab card shadow mb-4 tab" style= "margin-left:20%;">
+    <form [formGroup]="this.userService.dataForm" (ngSubmit)="onSubmit()">
+      <h5 class="text-center mt-1">Image d'utilisateur</h5>
+      <div *ngIf="currentUser.filename === null">
+        <img class="card-img-top img-responsive"
+            src = "../../../assets/images/user.png"
+            style = "height :150px;width:120px"
+           alt="">
+        </div> 
+        <div *ngIf="currentUser.filename !== null">
+          <img class="card-img-top img-responsive"
+              src = "{{'http://piece-de-rechange.herokuapp.com/api/ImgUser/'+currentUser.user_id}}" 
+              style = "height :150px;width:120px"
+             alt="">
+          </div>
+
+<div class="form-group">
+    <label>Uploader Une image</label>
+        <input type="file" accept="image/*" (change)="onSelectFile($event)">
+        <img [src]="imgURL" height="200" *ngIf="imgURL">
+</div>
+
+
+<button *ngIf="currentUser.filename !== null" class="button" type="submit">Metre à jour</button>
+<button *ngIf="currentUser.filename !== null" class="button" routerLink="/utilisateurs">conserver l'actuel image</button>
+
+<button *ngIf="currentUser.filename === null" class="button" type="submit">Ajouter Photo de proil</button>
+<button *ngIf="currentUser.filename === null" class="button" routerLink="/utilisateurs">retour</button>
+</form>
+</div>

@@ -1,0 +1,34 @@
+<app-dashboard></app-dashboard>
+<div class="container all">
+<form [formGroup]="this.marqueService.dataForm" (ngSubmit)="addData()">
+    <input type="hidden"  formControlName="id" id="id">
+  
+    <!-- <div class="form-group">
+      <label>id Marque </label>
+      <input type="number" class="form-control"  formControlName="id" id="libelle" readonly>
+    </div> -->
+   
+   
+    <div class="form-group">
+      <label>Libelle Marque </label>
+      <input type="text" class="form-control"  formControlName="libelleMarque" id="libelle">
+    </div>
+    
+
+    <div class="form-group">
+        <label>File Upload  </label>
+            <input type="file" accept="image/*" value="{{'/api/Imgarticles/'+currentMarque.id}}" (change)="onSelectFile($event)">
+            <img [src]="imgURL" height="200" *ngIf="imgURL">
+    </div>
+
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+      <a class="btn btn-outline-success" routerLink="/ajout-marque"><i class="fa fa-plus-square"></i> Liste</a>
+    </div>
+
+
+  </form></div>
+
+
+

@@ -1,0 +1,339 @@
+<div class="n"><app-navbar></app-navbar></div>
+<div class="" style="background-color:#e9ebedaf ;">
+ 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div  class="container" style="padding-bottom:100px ;">
+    
+        <!-- Page header start -->
+        <div class="page-title">
+            <div class="row gutters">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <h5 class="title">Messages</h5>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"> </div>
+            </div>
+        </div>
+        <!-- Page header end -->
+    
+        <!-- Content wrapper start -->
+        <div class="content-wrapper">
+    
+            <!-- Row start -->
+            <div class="row gutters">
+    
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    
+                    <div class="card m-0">
+    
+                        <!-- Row start -->
+                        <div class="row no-gutters">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+                                <div class="users-container">
+                                    <div class="chat-search-box">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="Search">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-info">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="ml-5 mt-5">
+                                            <h5>discussions</h5>
+                                        </div>
+                                        
+                                    </div>
+                                    <ul class="users" *ngFor="let c of contacts">
+                                        <li *ngIf="this.authServices.loggedUser!==c.username" class="person" data-chat="person1">
+                                            <div class="user">
+                                                <div *ngIf="c.filename === null">
+                                                    <a (click)="toDiscussion(c.username)">
+                                                      <img class="card-img-top img-responsive rounded-circle image-user"
+                                                    src =  "../../../assets/images/user.png" 
+                                                    style = "height :50px;width:50px"
+                                                   alt="">
+                                                    </a>
+                                                  </div>
+                                                  <div  *ngIf="c.filename !== null">
+                                                    <a (click)="toDiscussion(c.username)">
+                                                      <img class="card-img-top img-responsive rounded-circle image-user"
+                                                      src = "{{'http://localhost:8081/api/ImgUser/'+c.user_id}}" 
+                                                      style = "height :50px;width:50px"
+                                                     alt="">
+                                                    </a>
+                                                    
+                                                  </div>
+                                                <span class="status busy"></span>
+                                            </div>
+                                            <p class="name-time">
+                                                <span class="name">{{c.prenom}} {{c.nom}}</span>
+                                                <!-- <span class="time">15/02/2019</span> -->
+                                            </p>
+                                        </li>
+                                       
+                                      
+                                        
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- messages tools -->
+                            <div  class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+                                <div class="selected-user" style="display: flex;">
+                                   <!-- <div>
+
+                                    
+                                            <span class="name" >
+                                                {{user?.prenom}} {{user?.nom}}
+                                            </span>
+                                       
+                                </div> -->
+
+                                <!-- <div>
+                                    <p>
+                                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3 collapseExample collapseExample2">
+                                          tout les messages
+                                        </button>
+                                      </p>
+                                </div> -->
+
+                                <div>
+                                    
+                                        <div class="" id="headingOne">
+                                            <h2 class="mb-0">
+                                              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                tout les messages
+                                              </button>
+                                            </h2>
+                                          </div>
+                                      
+                                </div>
+
+                                <div>
+                                    <div class="" id="headingTwo">
+                                        <h2 class="mb-0">
+                                          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                           Messages réçus
+                                          </button>
+                                        </h2>
+                                      </div>
+                                </div>
+
+                                <div>
+                                    <div class="" id="headingThree">
+                                        <h2 class="mb-0">
+                                          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Messages envoyées
+                                          </button>
+                                        </h2>
+                                      </div>
+                                </div>
+
+                                </div>
+                                <!-- tout -->
+                          
+                                  
+
+
+                                <!-- reçus -->
+                               
+                               
+
+
+                                 
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card" style="    margin-bottom: 0;">
+                                      <!-- <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Collapsible Group Item #1
+                                          </button>
+                                        </h2>
+                                      </div> -->
+                                  
+                                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+
+                                            <div class="row border-top border-bottom ml-2" *ngFor="let m of toutMessages">
+                                                <div class="row main align-items-center">
+                                                    <div  class="chat-avatar">
+                                                        <div *ngIf="m.auteur.filename === null">
+                                                            <a (click)="toDiscussion(m.auteur.username)">
+                                                              <img class="card-img-top img-responsive rounded-circle image-user"
+                                                            src =  "../../../assets/images/user.png" 
+                                                            style = "height :50px;width:50px"
+                                                           alt="">
+                                                            </a>
+                                                          </div>
+                                                          <div  *ngIf="m.auteur.filename !== null">
+                                                            <a (click)="toDiscussion(m.auteur.username)">
+                                                              <img class="card-img-top img-responsive rounded-circle image-user"
+                                                              src = "{{'http://localhost:8081/api/ImgUser/'+m.auteur.user_id}}" 
+                                                              style = "height :50px;width:50px"
+                                                             alt="">
+                                                            </a>
+                                                            
+                                                          </div>
+                                                        <!-- <div class="chat-name">Vous</div> -->
+                                                    </div>   
+    
+                                                
+    
+                                                    <div class="col">
+                                                        <div *ngIf="m.auteur.username !== this.authServices.loggedUser" class="row text-muted">
+                                                            {{m.auteur.prenom}} {{m.auteur.nom}}
+                                                        </div>
+                                                        <div *ngIf="m.auteur.username === this.authServices.loggedUser" class="row text-muted">
+                                                            {{m.emiter.prenom}} {{m.emiter.nom}}
+                                                        </div>
+                                                        <div  class="row">{{m.message}}</div>
+                                                        <!-- <div *ngIf="m.auteur.username === this.authServices.loggedUser" class="row"><i class="fa fa-arrow-right"></i> {{m.message}}</div> -->
+                                                      <div style="display:flex;" *ngIf="m.auteur.username === this.authServices.loggedUser"> 
+                                                        <p>pour:</p> 
+                                                         <a  class="btn btn-outline-danger" (click)="toDiscussion(m.emiter.username)" >{{m.emiter.prenom}} {{m.emiter.nom}} </a>
+                                                      </div> 
+                                                    </div>
+                                                   
+                                                    <!-- <div class="col">{{c.produit.prixProduit | currency:"TND":"symbol"}} <span class="close"style="">en cours</span></div> -->
+                                                </div>
+                                            </div>
+                                      
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card" style="    margin-bottom: 0;">
+                                      <!-- <div class="card-header" id="headingTwo">
+                                        <h2 class="mb-0">
+                                          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Collapsible Group Item #2
+                                          </button>
+                                        </h2>
+                                      </div> -->
+                                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="row border-top border-bottom ml-2" *ngFor="let m of messagesReceved">
+                                                <div class="row main align-items-center">
+                                                    <div  class="chat-avatar">
+                                                        <div *ngIf="m.auteur.filename === null">
+                                                            <a (click)="toDiscussion(m.auteur.username)">
+                                                              <img class="card-img-top img-responsive rounded-circle image-user"
+                                                            src =  "../../../assets/images/user.png" 
+                                                            style = "height :50px;width:50px"
+                                                           alt="">
+                                                            </a>
+                                                          </div>
+                                                          <div  *ngIf="m.auteur.filename !== null">
+                                                            <a (click)="toDiscussion(m.auteur.username)">
+                                                              <img class="card-img-top img-responsive rounded-circle image-user"
+                                                              src = "{{'http://localhost:8081/api/ImgUser/'+m.auteur.user_id}}" 
+                                                              style = "height :50px;width:50px"
+                                                             alt="">
+                                                            </a>
+                                                            
+                                                          </div>
+                                                        <!-- <div class="chat-name">Vous</div> -->
+                                                    </div>   
+    
+                                                
+    
+                                                    <div class="col">
+                                                        <div *ngIf="m.auteur.username !== this.authServices.loggedUser" class="row text-muted">
+                                                            {{m.auteur.prenom}} {{m.auteur.nom}}
+                                                        </div>
+                                                        <div *ngIf="m.auteur.username === this.authServices.loggedUser" class="row text-muted">
+                                                            {{m.emiter.prenom}} {{m.emiter.nom}}
+                                                        </div>
+                                                        <div  class="row">{{m.message}}</div>
+                                                        <!-- <div *ngIf="m.auteur.username === this.authServices.loggedUser" class="row"><i class="fa fa-arrow-right"></i> {{m.message}}</div> -->
+                                                      <div style="display:flex;" *ngIf="m.auteur.username === this.authServices.loggedUser"> 
+                                                        <p>pour:</p> 
+                                                         <a  class="btn btn-outline-danger" (click)="toDiscussion(m.emiter.username)" >{{m.emiter.prenom}} {{m.emiter.nom}} </a>
+                                                      </div> 
+                                                    </div>
+                                                   
+                                                    <!-- <div class="col">{{c.produit.prixProduit | currency:"TND":"symbol"}} <span class="close"style="">en cours</span></div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card" style="margin-bottom:0;">
+                                      <!-- <div class="card-header" id="headingThree">
+                                        <h2 class="mb-0">
+                                          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Collapsible Group Item #3
+                                          </button>
+                                        </h2>
+                                      </div> -->
+                                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="row border-top border-bottom ml-2" *ngFor="let m of messagesEnvoyee">
+                                                <div class="row main align-items-center">
+                                                    <div  class="chat-avatar">
+                                                        <div *ngIf="m.auteur.filename === null">
+                                                            <a (click)="toDiscussion(m.auteur.username)">
+                                                              <img class="card-img-top img-responsive rounded-circle image-user"
+                                                            src =  "../../../assets/images/user.png" 
+                                                            style = "height :50px;width:50px"
+                                                           alt="">
+                                                            </a>
+                                                          </div>
+                                                          <div  *ngIf="m.auteur.filename !== null">
+                                                            <a (click)="toDiscussion(m.auteur.username)">
+                                                              <img class="card-img-top img-responsive rounded-circle image-user"
+                                                              src = "{{'http://localhost:8081/api/ImgUser/'+m.auteur.user_id}}" 
+                                                              style = "height :50px;width:50px"
+                                                             alt="">
+                                                            </a>
+                                                            
+                                                          </div>
+                                                        <!-- <div class="chat-name">Vous</div> -->
+                                                    </div>   
+    
+                                                
+    
+                                                    <div class="col">
+                                                        <div *ngIf="m.auteur.username !== this.authServices.loggedUser" class="row text-muted">
+                                                            {{m.auteur.prenom}} {{m.auteur.nom}}
+                                                        </div>
+                                                        <div *ngIf="m.auteur.username === this.authServices.loggedUser" class="row text-muted">
+                                                            {{m.emiter.prenom}} {{m.emiter.nom}}
+                                                        </div>
+                                                        <div  class="row">{{m.message}}</div>
+                                                        <!-- <div *ngIf="m.auteur.username === this.authServices.loggedUser" class="row"><i class="fa fa-arrow-right"></i> {{m.message}}</div> -->
+                                                      <div style="display:flex;" *ngIf="m.auteur.username === this.authServices.loggedUser"> 
+                                                        <p>pour:</p> 
+                                                         <a  class="btn btn-outline-danger" (click)="toDiscussion(m.emiter.username)" >{{m.emiter.prenom}} {{m.emiter.nom}} </a>
+                                                      </div> 
+                                                    </div>
+                                                   
+                                                    <!-- <div class="col">{{c.produit.prixProduit | currency:"TND":"symbol"}} <span class="close"style="">en cours</span></div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+
+                             
+                            </div>
+                        </div>
+                        <!-- Row end -->
+                    </div>
+    
+                </div>
+    
+            </div>
+            <!-- Row end -->
+    
+        </div>
+        <!-- Content wrapper end -->
+    
+    </div>
+</div>
+
+<app-footer></app-footer>
+

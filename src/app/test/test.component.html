@@ -1,0 +1,95 @@
+
+
+ 
+  <div class="container">
+    <form [formGroup]="this.produitService.dataForm" (ngSubmit)="onSubmit()">
+        <h3>Ajouter un Produit</h3>
+
+        <!-- <div>
+            <label for="idProduit">
+                id Produit
+            </label>
+            <input id="idProduit" type="number" formControlName="idProduit">
+          </div> -->
+
+
+          <div>
+            <label for="nomProduit">
+                libelle Produit
+            </label>
+            <input id="nomProduit" type="text" formControlName="nomProduit">
+          </div>
+
+          <div>
+            <label for="prixProduit">
+                libelle Produit
+            </label>
+            <input id="prixProduit" type="number" formControlName="prixProduit">
+          </div>
+
+          <div>
+            <label for="dateCreation">
+                libelle Produit
+            </label>
+            <input id="dateCreation" type="date" formControlName="dateCreation">
+          </div>
+
+
+
+          <!-- <div>
+            <label for="categorie_id">
+                categorie_id
+            </label>
+            <input id="categorie_id" type="number" formControlName="categorie_id">
+          </div> -->
+
+          <div>
+              <label>Categorie</label>
+              <select  id="categorie_id" formControlName="categorie_id">
+                  <option *ngFor="let c of categories" [value]="c.id">
+                      {{c.nomCategorie}}
+                  </option>
+              </select>
+          </div>
+
+           <!-- <div>
+            <label>modeles</label>
+            <select  id="modeles" formControlName="modeles" multiple="multiple">
+                <option *ngFor="let m of modeles" [ngValue]="[m]">
+                    {{m.libelleModele}}
+                </option>
+            </select>
+        </div>  -->
+
+      
+        <div class="drop-container">
+         <!-- <form [formGroup]="form"> -->
+              <ng-multiselect-dropdown formControlName="modeles"
+            [placeholder]="''"
+            [settings]="dropdownSettings"
+            [data]="modeles"
+            (onSelect)="onItemSelect($event)"
+            >
+            </ng-multiselect-dropdown>
+            <!-- </form> -->
+            <!-- <div class="action">
+              <button (click)="handleButtonClick()">Press button</button>
+            </div> -->
+            
+          </div>
+
+       
+
+
+
+          <div class="form-group">
+            <label>File Upload  </label>
+                <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                <img [src]="imgURL" height="200" *ngIf="imgURL">
+        </div>
+
+
+          <button class="button" type="submit">Ajouter</button>
+    </form>
+</div>
+   
